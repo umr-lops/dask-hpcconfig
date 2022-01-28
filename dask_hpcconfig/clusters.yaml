@@ -1,0 +1,48 @@
+local:
+  cluster:
+    type: local
+    name: dask-worker-local
+
+datarmor-local:
+  cluster:
+    type: local
+    name: dask-worker-local
+    local-directory: $TMPDIR
+  distributed:
+    scheduler:
+      bandwidth: 10000000000    # 10000 MB/s estimated worker-worker bandwidth with IB, it should go better...
+    worker:
+      memory:
+        target: 0.90  # Avoid spilling to disk
+        spill: 0  # Avoid spilling to disk
+        pause: 0.95  # fraction at which we pause worker threads
+        terminate: 0.99  # fraction at which we terminate the worker
+      use-file-locking: False
+    comm:
+      compression: null
+
+datarmor:
+  cluster:
+    type: pbs
+    name: dask-worker-datarmor
+    cores: 28
+    memory: '120GB'
+    processes: 14
+    queue: mpi_1
+    death-timeout: 250
+    resource-spec: select=1:ncpus=28:mem=120GB
+    job-extra: [-m n]
+    interface: "ib0"
+    walltime: "12:00:00"
+    local-directory: "$TMPDIR"
+  distributed:
+    scheduler:
+      bandwidth: 10000000000    # 10000 MB/s estimated worker-worker bandwidth with IB, it should go better...
+    worker:
+      memory:
+        target: 0.90  # Avoid spilling to disk
+        spill: 0  # Avoid spilling to disk
+        pause: 0.95  # fraction at which we pause worker threads
+        terminate: 0.99  # fraction at which we terminate the worker
+    comm:
+      compression: null
