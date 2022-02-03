@@ -39,10 +39,19 @@ cluster = dask_hpcconfig.cluster(name)
 where `name` is the name of one of the available clusters.
 
 To override any particular setting:
+For example on 'datarmor-local' to use only 7 workers for increasing memory size of each worker: 
 ```python
-overrides = {"cluster.cores": 14, "distributed.worker.memory.target": 0.91}
-cluster = dask_hpcconfig.cluster(name, **overrides)
+overrides = {"cluster.n_workers": 7}
+cluster = dask_hpcconfig.cluster("datarmor-local", **overrides)
 ```
+
+For example on 'datarmor' to use only 7 workers for increasing memory size of each worker, and use 49 workers (i.e. 7 mpi_1 nodes) : 
+```python
+overrides = {"cluster.cores": 7}
+cluster = dask_hpcconfig.cluster("datarmor", **overrides)
+cluster.scale(49)
+```
+
 
 `cluster` can then be used to create a `Client`:
 ```python
