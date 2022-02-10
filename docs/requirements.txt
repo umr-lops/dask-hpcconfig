@@ -1,0 +1,12 @@
+dask-jobqueue
+dask[array]
+distributed
+typer
+rich
+pyyaml
+ipython
+sphinx
+sphinx-copybutton
+sphinx-panels
+sphinx-click
+sphinx-book-theme
