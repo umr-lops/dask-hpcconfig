@@ -55,7 +55,7 @@ datarmor-seq:
     cores: 1
     memory: '120GB'
     processes: 1
-    queue: seq
+    queue: sequentiel
     death-timeout: 250
     resource-spec: select=1:ncpus=1:mem=4GB
     job-extra: [-m n]
