@@ -1,3 +1,5 @@
+import os
+
 import dask
 
 from .definitions import load_cluster_definitions
@@ -34,20 +36,34 @@ def inflate_mapping(mapping):
     return new
 
 
+def set_dashboard_link_jupyterhub(definition):
+    # hack to work around a bug in dask-labextension
+    jupyterhub_user = os.environ.get("JUPYTERHUB_USER")
+    if jupyterhub_user:
+        dashboard_link = "/user/{JUPYTERHUB_USER}/proxy/{port}/status"
+        extra_configuration = {"distributed": {"dashboard": {"link": dashboard_link}}}
+        definition = dask.config.update(definition, extra_configuration)
+
+    return definition
+
+
 def cluster(name, *, asynchronous=False, loop=None, **overrides):
     definitions = load_cluster_definitions()
 
     # find the requested configuration
-    raw_definition = definitions.get(name)
-    if raw_definition is None:
+    definition = definitions.get(name)
+    if definition is None:
         raise ValueError(
             f"cluster: unknown configuration: {name!r}. Choose one of"
             f" {{{', '.join(map(repr, sorted(definitions.keys())))}}}."
         )
 
+    # set the dashboard link if on jupyterhub
+    definition = set_dashboard_link_jupyterhub(definition)
+
     # apply the overrides
     definition = dask.config.expand_environment_variables(
-        dask.config.update(raw_definition, inflate_mapping(overrides))
+        dask.config.update(definition, inflate_mapping(overrides))
     )
 
     # split cluster from general config
