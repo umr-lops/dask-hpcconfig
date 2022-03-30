@@ -11,3 +11,4 @@ sphinx-copybutton
 sphinx-panels
 sphinx-click
 sphinx-book-theme
+-e .
