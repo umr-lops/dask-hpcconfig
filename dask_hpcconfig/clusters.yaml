@@ -46,7 +46,7 @@ datarmor:
         terminate: 0.99  # fraction at which we terminate the worker
     comm:
       compression: null
-      
+
 
 datarmor-seq:
   cluster:
