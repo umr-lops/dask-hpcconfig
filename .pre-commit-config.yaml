@@ -12,13 +12,13 @@ repos:
       - id: isort
 
   - repo: https://github.com/psf/black
-    rev: 22.6.0
+    rev: 22.8.0
     hooks:
       - id: black
       - id: black-jupyter
 
   - repo: https://github.com/keewis/blackdoc
-    rev: v0.3.6
+    rev: v0.3.7
     hooks:
       - id: blackdoc
 
