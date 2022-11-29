@@ -2,7 +2,6 @@ dask-jobqueue
 dask[array]
 distributed
 typer
-click<8.1  # 8.1 breaks typer at the moment
 rich
 pyyaml
 ipython
