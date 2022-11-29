@@ -5,7 +5,7 @@ typer
 rich
 pyyaml
 ipython
-sphinx>=5
+sphinx
 sphinx-copybutton
 sphinx-design
 sphinx-click
