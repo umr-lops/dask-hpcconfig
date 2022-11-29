@@ -2,16 +2,16 @@ channels:
   - conda-forge
   - nodefaults
 dependencies:
-  - python=3.9
+  - python=3.10
   - dask
   - distributed
   - dask-jobqueue
   - pyyaml
   - typer
   - rich
-  - sphinx < 5
+  - sphinx
   - sphinx-book-theme
   - sphinx-click
   - sphinx-copybutton
-  - sphinx-panels
+  - sphinx-design
   - ipython

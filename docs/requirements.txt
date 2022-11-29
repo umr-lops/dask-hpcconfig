@@ -2,13 +2,12 @@ dask-jobqueue
 dask[array]
 distributed
 typer
-click<8.1  # 8.1 breaks typer at the moment
 rich
 pyyaml
 ipython
 sphinx
 sphinx-copybutton
-sphinx-panels
+sphinx-design
 sphinx-click
 sphinx-book-theme
 -e .
