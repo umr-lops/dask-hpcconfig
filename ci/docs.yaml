@@ -13,5 +13,5 @@ dependencies:
   - sphinx-book-theme
   - sphinx-click
   - sphinx-copybutton
-  - sphinx-panels
+  - sphinx-design
   - ipython
