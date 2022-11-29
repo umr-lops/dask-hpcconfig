@@ -9,7 +9,7 @@ dependencies:
   - pyyaml
   - typer
   - rich
-  - sphinx < 5
+  - sphinx
   - sphinx-book-theme
   - sphinx-click
   - sphinx-copybutton
