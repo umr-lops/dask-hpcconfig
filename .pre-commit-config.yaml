@@ -23,7 +23,7 @@ repos:
       - id: blackdoc
       - id: blackdoc-autoupdate-black
     additional_dependencies:
-      - black==22.10.0
+      - black==22.12.0
 
   - repo: https://github.com/pycqa/flake8
     rev: 6.0.0
