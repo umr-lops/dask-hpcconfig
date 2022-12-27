@@ -31,7 +31,7 @@ datarmor:
     queue: mpi_1
     death-timeout: 250
     resource-spec: select=1:ncpus=28:mem=120GB
-    job-extra: [-m n]
+    job-extra-directives: [-m n]
     interface: "ib0"
     walltime: "12:00:00"
     local-directory: "$TMPDIR"
@@ -58,7 +58,7 @@ datarmor-seq:
     queue: sequentiel
     death-timeout: 250
     resource-spec: select=1:ncpus=1:mem=4GB
-    job-extra: [-m n]
+    job-extra-directives: [-m n]
     interface: "ib0"
     walltime: "12:00:00"
     local-directory: "$TMPDIR"
