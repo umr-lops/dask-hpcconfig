@@ -187,8 +187,6 @@ def cluster(name, *, asynchronous=False, loop=None, **overrides):
             f"cluster: malformed cluster definition of {name}: needs at least the 'cluster' key"
         )
 
-    return definition
-
     # instantiate cluster class
     cluster = new_cluster(name, cluster_config, asynchronous=asynchronous)
 
