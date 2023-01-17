@@ -78,26 +78,28 @@ def expand_custom_cluster_settings(definition):
         return definition
 
     # pop because 'memory_limit' is a custom setting
-    memory_limit = cluster_config.pop("memory_limit")
+    worker_memory = cluster_config.pop("worker_memory")
     processes = cluster_config.get("processes")
 
     memory_ = dask.utils.parse_bytes(memory)
-    memory_limit_ = dask.utils.parse_bytes(memory_limit)
+    worker_memory_ = (
+        dask.utils.parse_bytes(worker_memory) if worker_memory is not None else None
+    )
 
-    if memory_limit is not None and processes is None:
+    if worker_memory is not None and processes is None:
         # translate "memory_limit" to processes, and possibly adjust "memory"
-        processes_ = memory_ // memory_limit_
+        processes_ = memory_ // worker_memory_
         if processes_ == 0:
             raise ValueError(
-                "invalid memory_limit:"
-                f" per worker memory ({memory_limit}) must be smaller"
+                "invalid worker_memory:"
+                f" per worker memory ({worker_memory}) must be smaller"
                 f" or equal to the total memory ({memory})"
             )
 
-        new_memory_ = processes_ * memory_limit_
-    elif memory_limit is not None and processes is not None:
+        new_memory_ = processes_ * worker_memory_
+    elif worker_memory is not None and processes is not None:
         processes_ = processes
-        new_memory_ = processes_ * memory_limit_
+        new_memory_ = processes_ * worker_memory_
     else:
         # nothing to do
         return definition
@@ -105,7 +107,7 @@ def expand_custom_cluster_settings(definition):
     new_memory = dask.utils.format_bytes(new_memory_)
     if new_memory_ > memory_:
         raise ValueError(
-            f"the requested combination of 'memory_limit' ({memory_limit})"
+            f"the requested combination of 'worker_memory' ({worker_memory})"
             f" and 'processes' ({processes}) exceeds the total memory:"
             f" {new_memory} > {memory}"
         )
