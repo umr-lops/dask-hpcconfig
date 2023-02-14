@@ -7,12 +7,12 @@ repos:
       - id: check-yaml
 
   - repo: https://github.com/pycqa/isort
-    rev: 5.11.4
+    rev: 5.12.0
     hooks:
       - id: isort
 
   - repo: https://github.com/psf/black
-    rev: 22.12.0
+    rev: 23.1.0
     hooks:
       - id: black
       - id: black-jupyter
@@ -23,7 +23,7 @@ repos:
       - id: blackdoc
       - id: blackdoc-autoupdate-black
     additional_dependencies:
-      - black==22.12.0
+      - black==23.1.0
 
   - repo: https://github.com/pycqa/flake8
     rev: 6.0.0
