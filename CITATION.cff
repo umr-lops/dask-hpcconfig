@@ -29,7 +29,7 @@ identifiers:
 repository-code: 'https://github.com/umr-lops/dask-hpcconfig'
 abstract: >-
   'dask-hpcconfig' provides an easy interface for creating
-  dask cluster optimised for each HPC environment.  
+  dask cluster optimised for each HPC environment.
 keywords:
   - Dask
   - HPC
