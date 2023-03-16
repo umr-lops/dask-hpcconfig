@@ -77,6 +77,8 @@ def expand_custom_cluster_settings(definition):
         # the memory has to be set
         return definition
 
+    definition = definition.copy(deep=True)
+
     # pop because 'memory_limit' is a custom setting
     worker_memory = cluster_config.pop("worker_memory", None)
     processes = cluster_config.get("processes")
@@ -113,7 +115,7 @@ def expand_custom_cluster_settings(definition):
         )
 
     new_settings = {"memory": new_memory, "processes": processes_}
-    cluster_config.update(new_settings)
+    cluster_config = cluster_config | new_settings
 
     normalized = dask.config.canonical_name("resource_spec", cluster_config)
     if normalized in cluster_config:
@@ -122,6 +124,7 @@ def expand_custom_cluster_settings(definition):
             {"mem": format_resource_size(new_memory_)},
         )
 
+    definition = definition.copy()
     definition["cluster"] = cluster_config
 
     return definition
