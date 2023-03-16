@@ -21,9 +21,9 @@ repos:
     rev: v0.3.8
     hooks:
       - id: blackdoc
+        additional_dependencies:
+          - black==23.1.0
       - id: blackdoc-autoupdate-black
-    additional_dependencies:
-      - black==23.1.0
 
   - repo: https://github.com/pycqa/flake8
     rev: 6.0.0
