@@ -7,14 +7,16 @@ datarmor-local:
   cluster:
     type: local
     name: dask-worker-local
+    threads_per_worker: 2
+    n_workers: 14
     local-directory: $TMPDIR
   distributed:
     scheduler:
-      bandwidth: 10000000000    # 10000 MB/s estimated worker-worker bandwidth with IB, it should go better...
+      bandwidth: 10000000000    # 10000 MB/s estimated worker-worker bandwidth in the same node.
     worker:
       memory:
         target: 0.90  # Avoid spilling to disk
-        spill: 0  # Avoid spilling to disk
+        spill: 0  # Do not use any spill to disk.  Datarmor have 'no local disk' thus never spill to a disk
         pause: 0.95  # fraction at which we pause worker threads
         terminate: 0.99  # fraction at which we terminate the worker
       use-file-locking: False
@@ -40,8 +42,8 @@ datarmor:
       bandwidth: 10000000000    # 10000 MB/s estimated worker-worker bandwidth with IB, it should go better...
     worker:
       memory:
-        target: 0.90  # Avoid spilling to disk
-        spill: 0  # Avoid spilling to disk
+        target: 0.90  # try to use only 90% of memory allocated by the worker
+        spill: 0  # Do not use any spill to disk.  Datarmor have 'no local disk' thus never spill to a disk
         pause: 0.95  # fraction at which we pause worker threads
         terminate: 0.99  # fraction at which we terminate the worker
     comm:
@@ -53,11 +55,11 @@ datarmor-seq:
     type: pbs
     name: dask-worker-datarmor
     cores: 1
-    memory: '120GB'
+    memory: '115GB'
     processes: 1
     queue: sequentiel
     death-timeout: 250
-    resource-spec: select=1:ncpus=1:mem=4GB
+    resource-spec: select=1:ncpus=1:mem=115GB
     job-extra-directives: [-m n]
     interface: "ib0"
     walltime: "12:00:00"
@@ -68,7 +70,7 @@ datarmor-seq:
     worker:
       memory:
         target: 0.90  # Avoid spilling to disk
-        spill: 0  # Avoid spilling to disk
+        spill: 0  # Do not use any spill to disk.  Datarmor have 'no local disk' thus never spill to a disk
         pause: 0.95  # fraction at which we pause worker threads
         terminate: 0.99  # fraction at which we terminate the worker
     comm:
