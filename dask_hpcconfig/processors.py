@@ -53,14 +53,14 @@ def expand_custom_cluster_settings(definition):
 
     The options to control resource usage are:
     - job memory (`memory`)
-    - per worker memory (`memory_limit`)
+    - per worker memory (`worker_memory`)
     - number of workers (`processes`)
 
     Since `memory` has to always be specified as an upper limit, this leaves us with three
     combinations:
-    - `memory` and `memory_limit`: compute processes and adjust `memory`
+    - `memory` and `worker_memory`: compute processes and adjust `memory`
     - `memory` and `processes`: standard mode: just pass everything as is
-    - `processes` and `memory_limit`: compute new memory
+    - `processes` and `worker_memory`: compute new memory
 
     These will fail if
     - `processes` would be 0
@@ -89,7 +89,7 @@ def expand_custom_cluster_settings(definition):
     )
 
     if worker_memory is not None and processes is None:
-        # translate "memory_limit" to processes, and possibly adjust "memory"
+        # translate "worker_memory" to processes, and possibly adjust "memory"
         processes_ = memory_ // worker_memory_
         if processes_ == 0:
             raise ValueError(
