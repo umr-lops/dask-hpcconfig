@@ -67,7 +67,7 @@ def expand_custom_cluster_settings(definition):
     - the computed `memory` would exceed the given maximum value
     """
 
-    cluster_config = definition.get("cluster")
+    cluster_config = definition.get("cluster").copy()
     if cluster_config is None:
         # invalid, but the error is raised later
         return definition
@@ -76,8 +76,6 @@ def expand_custom_cluster_settings(definition):
     if memory is None:
         # the memory has to be set
         return definition
-
-    definition = definition.copy(deep=True)
 
     # pop because 'worker_memory' is a custom setting
     worker_memory = cluster_config.pop("worker_memory", None)
