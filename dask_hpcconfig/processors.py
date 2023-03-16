@@ -78,7 +78,7 @@ def expand_custom_cluster_settings(definition):
         return definition
 
     # pop because 'memory_limit' is a custom setting
-    worker_memory = cluster_config.pop("worker_memory")
+    worker_memory = cluster_config.pop("worker_memory", None)
     processes = cluster_config.get("processes")
 
     memory_ = dask.utils.parse_bytes(memory)
