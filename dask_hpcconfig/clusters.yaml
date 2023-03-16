@@ -7,8 +7,6 @@ datarmor-local:
   cluster:
     type: local
     name: dask-worker-local
-    threads_per_worker: 2
-    n_workers: 14
     local-directory: $TMPDIR
   distributed:
     scheduler:
@@ -55,11 +53,11 @@ datarmor-seq:
     type: pbs
     name: dask-worker-datarmor
     cores: 1
-    memory: '115GB'
+    memory: '120GB'
     processes: 1
     queue: sequentiel
     death-timeout: 250
-    resource-spec: select=1:ncpus=1:mem=115GB
+    resource-spec: select=1:ncpus=1:mem=4GB
     job-extra-directives: [-m n]
     interface: "ib0"
     walltime: "12:00:00"
