@@ -1,8 +1,7 @@
-import os
-
 import dask
 
 from .definitions import load_cluster_definitions
+from .processors import expand_custom_cluster_settings, set_dashboard_link_jupyterhub
 from .types import _cluster_type
 
 
@@ -36,17 +35,6 @@ def inflate_mapping(mapping):
     return new
 
 
-def set_dashboard_link_jupyterhub(definition):
-    # hack to work around a bug in dask-labextension
-    jupyterhub_user = os.environ.get("JUPYTERHUB_USER")
-    if jupyterhub_user:
-        dashboard_link = "/user/{JUPYTERHUB_USER}/proxy/{port}/status"
-        extra_configuration = {"distributed": {"dashboard": {"link": dashboard_link}}}
-        definition = dask.config.update(definition, extra_configuration)
-
-    return definition
-
-
 def cluster(name, *, asynchronous=False, loop=None, **overrides):
     definitions = load_cluster_definitions()
 
@@ -66,6 +54,9 @@ def cluster(name, *, asynchronous=False, loop=None, **overrides):
         dask.config.update(definition, inflate_mapping(overrides))
     )
 
+    # convert special configuration settings
+    definition = expand_custom_cluster_settings(definition)
+
     # split cluster from general config
     cluster_config = definition.get("cluster")
     if cluster_config is None:
@@ -77,7 +68,7 @@ def cluster(name, *, asynchronous=False, loop=None, **overrides):
     cluster = new_cluster(name, cluster_config, asynchronous=asynchronous)
 
     # feed every other setting to `dask.config.merge` before passing it to `dask.config.set` (because
-    # that is replaces any top-level attributes)
+    # that replaces any top-level attributes)
     merged = dask.config.merge(
         dask.config.config, {k: v for k, v in definition.items() if k != "cluster"}
     )
