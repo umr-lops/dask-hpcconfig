@@ -12,7 +12,7 @@ repos:
       - id: isort
 
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 23.3.0
     hooks:
       - id: black
       - id: black-jupyter
@@ -22,7 +22,7 @@ repos:
     hooks:
       - id: blackdoc
         additional_dependencies:
-          - black==23.1.0
+          - black==23.3.0
       - id: blackdoc-autoupdate-black
 
   - repo: https://github.com/pycqa/flake8
