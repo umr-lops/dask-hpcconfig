@@ -26,7 +26,7 @@ jobs:
           pip install dist/*.whl
           python -c 'import dask_hpcconfig'
       - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@a3a3bafbb3e5a75a854ae1bc53ae128cf22c4af4
+        uses: pypa/gh-action-pypi-publish@29930c9cf57955dc1b98162d0d8bc3ec80d9e75c
         with:
           password: ${{ secrets.pypi_token }}
           repository_url: https://upload.pypi.org/legacy/
