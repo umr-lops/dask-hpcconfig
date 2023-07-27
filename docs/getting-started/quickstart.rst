@@ -1,4 +1,4 @@
-Quickstart
+Quickstart on your local PC
 ==========
 
 .. ipython::
