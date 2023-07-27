@@ -44,6 +44,7 @@ extensions = [
     "sphinx_copybutton",
     "sphinx_design",
     "sphinx_click",
+    "nbsphinx",
 ]
 
 # Add any paths that contain templates here, relative to this directory.

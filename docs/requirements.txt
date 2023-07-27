@@ -5,6 +5,7 @@ typer
 rich
 pyyaml
 ipython
+nbsphinx
 sphinx
 sphinx-copybutton
 sphinx-design
