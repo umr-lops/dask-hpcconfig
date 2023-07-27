@@ -1,10 +1,10 @@
 Installing
 ==========
-``dask-hpcconfig`` can be installed from github:
+``dask-hpcconfig`` can be installed using pip install:
 
 .. code:: bash
 
-    python -m pip install git+https://github.com/umr-lops/dask-hpcconfig.git#egg=dask-hpcconfig
+    pip install dask-hpcconfig
 
 or by cloning the repository:
 
