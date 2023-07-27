@@ -38,6 +38,7 @@ package to install if it is still missing.
 
    getting-started/installing
    getting-started/quickstart
+   getting-started/datarmor
 
 .. toctree::
    :maxdepth: 2
