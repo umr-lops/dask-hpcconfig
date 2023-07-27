@@ -1,6 +1,13 @@
 Quickstart
 ==========
 
+You can download a jupyter notebook from (here)[https://github.com/umr-lops/dask-hpcconfig/tree/main/docs/tutorials]
+and try out how it works on Datarmor.
+
+
+If you want to try on your localPC;
+
+
 .. ipython::
 
    In [1]: import distributed
