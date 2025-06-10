@@ -25,11 +25,6 @@ repos:
     hooks:
       - id: validate-pyproject
 
-  - repo: https://github.com/pycqa/isort
-    rev: 6.0.1
-    hooks:
-      - id: isort
-
   - repo: https://github.com/psf/black-pre-commit-mirror
     rev: 25.1.0
     hooks:
@@ -43,10 +38,11 @@ repos:
           - black==25.1.0
       - id: blackdoc-autoupdate-black
 
-  - repo: https://github.com/pycqa/flake8
-    rev: 7.1.2
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.13
     hooks:
-      - id: flake8
+      - id: ruff-check
+        args: ["--fix"]
 
 ci:
   autofix_prs: true
