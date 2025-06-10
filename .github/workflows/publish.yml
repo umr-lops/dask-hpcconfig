@@ -8,6 +8,11 @@ jobs:
   publish:
     name: Publish to PyPI
     runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/dask-hpcconfig
+    permissions:
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -28,6 +33,4 @@ jobs:
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@76f52bc884231f62b9a034ebfe128415bbaabdfc
         with:
-          password: ${{ secrets.pypi_token }}
-          repository_url: https://upload.pypi.org/legacy/
-          verify_metadata: true
+          verify-metadata: true
