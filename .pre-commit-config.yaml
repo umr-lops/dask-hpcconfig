@@ -47,3 +47,7 @@ repos:
     rev: 7.1.2
     hooks:
       - id: flake8
+
+ci:
+  autofix_prs: true
+  autoupdate_schedule: monthly
