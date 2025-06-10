@@ -94,8 +94,14 @@ dask-hpcconfig = { path = ".", editable = true }
 default = { solve-group = "default" }
 jobqueue = { features = ["jobqueue"], solve-group = "default" }
 build = ["build"]
+test = ["test"]
 
 [tool.pixi.tasks]
 
 [tool.pixi.feature.build.dependencies]
 python-build = "*"
+
+[tool.pixi.feature.test.dependencies]
+pytest = "*"
+cytoolz = "*"
+pytest-cov = "*"
