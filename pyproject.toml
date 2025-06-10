@@ -1,6 +1,38 @@
+[project]
+name = "dask-hpcconfig"
+authors = [{ name = "Justus Magin" }]
+license = "MIT"
+description = "Configuration for various dask clusters"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "pyyaml",
+  "dask>=2024.06.0",
+  "distributed>=2024.06.0",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+jobqueue = [
+  "dask-jobqueue>=0.8",
+]
+
+[project.urls]
+Documentation = "https://dask-hpcconfig.readthedocs.io"
+Repository = "https://github.com/umr-lops/dask-hpcconfig"
+
+[project.scripts]
+dask-hpcconfig = "dask_hpcconfig.cli:app"
+
 [build-system]
 requires = ["setuptools>=61", "wheel", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["dask_hpcconfig", "dask_hpcconfig.*"]
+
+[tool.setuptools.package-data]
+dask_hpcconfig = ["clusters.yaml"]
 
 [tool.setuptools_scm]
 fallback_version = "999"
