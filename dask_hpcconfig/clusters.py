@@ -1,10 +1,7 @@
 import dask
 
 from dask_hpcconfig.definitions import load_cluster_definitions
-from dask_hpcconfig.processors import (
-    expand_custom_cluster_settings,
-    set_dashboard_link_jupyterhub,
-)
+from dask_hpcconfig.processors import set_dashboard_link_jupyterhub
 from dask_hpcconfig.types import _cluster_type
 
 
@@ -56,9 +53,6 @@ def cluster(name, *, asynchronous=False, loop=None, **overrides):
     definition = dask.config.expand_environment_variables(
         dask.config.update(definition, inflate_mapping(overrides))
     )
-
-    # convert special configuration settings
-    definition = expand_custom_cluster_settings(definition)
 
     # split cluster from general config
     cluster_config = definition.get("cluster")
