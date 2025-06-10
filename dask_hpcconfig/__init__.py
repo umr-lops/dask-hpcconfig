@@ -1,6 +1,6 @@
-from .clusters import cluster
-from .definitions import available_clusters, print_clusters
-from .types import register_cluster_type
+from dask_hpcconfig.clusters import cluster
+from dask_hpcconfig.definitions import available_clusters, print_clusters
+from dask_hpcconfig.types import register_cluster_type
 
 try:
     import importlib.metadata

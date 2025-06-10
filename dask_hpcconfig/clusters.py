@@ -1,8 +1,11 @@
 import dask
 
-from .definitions import load_cluster_definitions
-from .processors import expand_custom_cluster_settings, set_dashboard_link_jupyterhub
-from .types import _cluster_type
+from dask_hpcconfig.definitions import load_cluster_definitions
+from dask_hpcconfig.processors import (
+    expand_custom_cluster_settings,
+    set_dashboard_link_jupyterhub,
+)
+from dask_hpcconfig.types import _cluster_type
 
 
 def new_cluster(name, config, *, asynchronous=False, loop=None):
