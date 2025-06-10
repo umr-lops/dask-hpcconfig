@@ -12,13 +12,13 @@ datarmor-local:
     local-directory: $TMPDIR
   distributed:
     scheduler:
-      bandwidth: 10000000000    # 10000 MB/s estimated worker-worker bandwidth in the same node.
+      bandwidth: 10000000000 # 10000 MB/s estimated worker-worker bandwidth in the same node.
     worker:
       memory:
-        target: 0.90  # Avoid spilling to disk
-        spill: 0  # Do not use any spill to disk.  Datarmor have 'no local disk' thus never spill to a disk
-        pause: 0.95  # fraction at which we pause worker threads
-        terminate: 0.99  # fraction at which we terminate the worker
+        target: 0.90 # Avoid spilling to disk
+        spill: 0 # Do not use any spill to disk.  Datarmor have 'no local disk' thus never spill to a disk
+        pause: 0.95 # fraction at which we pause worker threads
+        terminate: 0.99 # fraction at which we terminate the worker
       use-file-locking: False
     comm:
       compression: null
@@ -28,7 +28,7 @@ datarmor:
     type: pbs
     name: dask-worker-datarmor
     cores: 28
-    memory: '120GB'
+    memory: "120GB"
     processes: 14
     queue: mpi_1
     death-timeout: 250
@@ -39,23 +39,22 @@ datarmor:
     local-directory: "$TMPDIR"
   distributed:
     scheduler:
-      bandwidth: 10000000000    # 10000 MB/s estimated worker-worker bandwidth with IB, it should go better...
+      bandwidth: 10000000000 # 10000 MB/s estimated worker-worker bandwidth with IB, it should go better...
     worker:
       memory:
-        target: 0.90  # try to use only 90% of memory allocated by the worker
-        spill: 0  # Do not use any spill to disk.  Datarmor have 'no local disk' thus never spill to a disk
-        pause: 0.95  # fraction at which we pause worker threads
-        terminate: 0.99  # fraction at which we terminate the worker
+        target: 0.90 # try to use only 90% of memory allocated by the worker
+        spill: 0 # Do not use any spill to disk.  Datarmor have 'no local disk' thus never spill to a disk
+        pause: 0.95 # fraction at which we pause worker threads
+        terminate: 0.99 # fraction at which we terminate the worker
     comm:
       compression: null
-
 
 datarmor-seq:
   cluster:
     type: pbs
     name: dask-worker-datarmor
     cores: 1
-    memory: '115GB'
+    memory: "115GB"
     processes: 1
     queue: sequentiel
     death-timeout: 250
@@ -66,12 +65,12 @@ datarmor-seq:
     local-directory: "$TMPDIR"
   distributed:
     scheduler:
-      bandwidth: 10000000000    # 10000 MB/s estimated worker-worker bandwidth with IB, it should go better...
+      bandwidth: 10000000000 # 10000 MB/s estimated worker-worker bandwidth with IB, it should go better...
     worker:
       memory:
-        target: 0.90  # Avoid spilling to disk
-        spill: 0  # Do not use any spill to disk.  Datarmor have 'no local disk' thus never spill to a disk
-        pause: 0.95  # fraction at which we pause worker threads
-        terminate: 0.99  # fraction at which we terminate the worker
+        target: 0.90 # Avoid spilling to disk
+        spill: 0 # Do not use any spill to disk.  Datarmor have 'no local disk' thus never spill to a disk
+        pause: 0.95 # fraction at which we pause worker threads
+        terminate: 0.99 # fraction at which we terminate the worker
     comm:
       compression: null
