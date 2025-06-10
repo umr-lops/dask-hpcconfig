@@ -16,6 +16,11 @@ dynamic = ["version"]
 jobqueue = [
   "dask-jobqueue>=0.8",
 ]
+cli = [
+  "typer",
+  "rich",
+  "tornado",
+]
 
 [project.urls]
 Documentation = "https://dask-hpcconfig.readthedocs.io"
