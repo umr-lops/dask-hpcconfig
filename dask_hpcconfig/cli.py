@@ -11,8 +11,8 @@ from rich.rule import Rule
 from rich.table import Table
 from tornado.ioloop import IOLoop
 
-from . import available_clusters
-from . import cluster as create_cluster
+from dask_hpcconfig import available_clusters
+from dask_hpcconfig import cluster as create_cluster
 
 ClusterNames = enum.Enum("ClusterNames", {n: n for n in available_clusters()})
 ClusterNames.__str__ = lambda x: x.name

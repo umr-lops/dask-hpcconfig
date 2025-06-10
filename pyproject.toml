@@ -1,13 +1,112 @@
+[project]
+name = "dask-hpcconfig"
+authors = [{ name = "Justus Magin" }]
+license = "MIT"
+description = "Configuration for various dask clusters"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "pyyaml",
+  "dask>=2024.06.0",
+  "distributed>=2024.06.0",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+jobqueue = [
+  "dask-jobqueue>=0.8",
+]
+cli = [
+  "typer",
+  "rich",
+  "tornado",
+]
+
+[project.urls]
+Documentation = "https://dask-hpcconfig.readthedocs.io"
+Repository = "https://github.com/umr-lops/dask-hpcconfig"
+
+[project.scripts]
+dask-hpcconfig = "dask_hpcconfig.cli:app"
+
 [build-system]
-requires = ["setuptools>=47", "wheel", "setuptools_scm[toml]>=3.4"]
+requires = ["setuptools>=61", "wheel", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["dask_hpcconfig", "dask_hpcconfig.*"]
+
+[tool.setuptools.package-data]
+dask_hpcconfig = ["clusters.yaml"]
 
 [tool.setuptools_scm]
 fallback_version = "999"
 
-[tool.isort]
-profile = "black"
-skip_gitignore = true
-float_to_top = true
-default_section = "THIRDPARTY"
-known_first_party = "dask_hpcconfig"
+[tool.ruff]
+target-version = "py310"
+builtins = ["ellipsis"]
+exclude = [
+  ".git",
+  ".eggs",
+  "build",
+  "dist",
+  "__pycache__",
+]
+line-length = 100
+
+[tool.ruff.lint]
+ignore = [
+  "E402", # E402: module level import not at top of file
+  "E501", # E501: line too long - let black worry about that
+  "E731", # E731: do not assign a lambda expression, use a def
+]
+select = [
+  "F",   # Pyflakes
+  "E",   # Pycodestyle
+  "I",   # isort
+  "UP",  # Pyupgrade
+  "TID", # flake8-tidy-imports
+  "W",
+]
+extend-safe-fixes = [
+  "TID252", # absolute imports
+]
+fixable = ["I", "TID252"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["dask_hpcconfig"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+# Disallow all relative imports.
+ban-relative-imports = "all"
+
+[tool.coverage.run]
+source = ["dask_hpcconfig"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = ["pragma: no cover", "if TYPE_CHECKING"]
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tool.pixi.pypi-dependencies]
+dask-hpcconfig = { path = ".", editable = true }
+
+[tool.pixi.environments]
+default = { solve-group = "default" }
+jobqueue = { features = ["jobqueue"], solve-group = "default" }
+build = ["build"]
+test = ["test"]
+
+[tool.pixi.tasks]
+
+[tool.pixi.feature.build.dependencies]
+python-build = "*"
+
+[tool.pixi.feature.test.dependencies]
+pytest = "*"
+cytoolz = "*"
+pytest-cov = "*"
