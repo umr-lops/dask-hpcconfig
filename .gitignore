@@ -24,3 +24,4 @@ dask-worker-space/
 # pixi environments
 .pixi
 *.egg-info
+pixi.lock
