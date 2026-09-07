@@ -21,7 +21,7 @@ repos:
         args: ["--no-schema"]
 
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: '0.26'
+    rev: "0.26"
     hooks:
       - id: validate-pyproject
 
@@ -35,7 +35,7 @@ repos:
     hooks:
       - id: blackdoc
         additional_dependencies:
-          - black==25.9.0
+          - black==26.5.1
       - id: blackdoc-autoupdate-black
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
